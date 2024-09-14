@@ -1,101 +1,149 @@
+"use client";
+
+import { signIn, useSession } from "next-auth/react";
+import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import HomePage from "@/components/HomePage";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const { data: session } = useSession();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <Navbar />
+      <main className="">
+        {session ? <HomePage /> : <LoggedOutHome />}
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
+
+function LoggedOutHome() {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <HeroSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <CTASection />
+    </div>
+  );
+}
+
+function HeroSection() {
+  return (
+    <section className="flex flex-col md:flex-row items-center justify-between py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="md:w-1/2 text-white"
+      >
+        <h1 className="text-5xl font-bold mb-6">Welcome to Alumni Connect</h1>
+        <p className="text-xl mb-8">Connect with alumni, get advice, and shape your future!</p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-blue-500 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg hover:bg-blue-600"
+          onClick={() => signIn("google")}
+        >
+          Get Started
+        </motion.button>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="md:w-1/2 mt-12 md:mt-0"
+      >
+        <Image src="/hero-image.png" alt="Alumni networking" width={600} height={400} className="rounded-lg shadow-xl" />
+      </motion.div>
+    </section>
+  );
+}
+
+function FeaturesSection() {
+  const features = [
+    { title: "Connect with Alumni", description: "Network with successful graduates from your college.", icon: "🤝" },
+    { title: "Get Expert Advice", description: "Receive guidance from experienced professionals in your field.", icon: "💡" },
+    { title: "Explore Opportunities", description: "Discover internships and job openings shared by alumni.", icon: "🚀" },
+  ];
+
+  return (
+    <section className="py-20 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl my-20">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold mb-12 text-center text-white">Why Choose Alumni Connect?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-gray-700 bg-opacity-50 p-6 rounded-lg shadow-md text-white"
+            >
+              <div className="text-4xl mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+              <p>{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection() {
+  const testimonials = [
+    { name: "John Doe", role: "Software Engineer", quote: "Alumni Connect helped me land my dream job!", avatar: "/avatar1.png" },
+    { name: "Jane Smith", role: "Marketing Manager", quote: "The advice I received was invaluable for my career growth.", avatar: "/avatar2.png" },
+  ];
+
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold mb-12 text-center text-white">What Our Users Say</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-md text-white"
+            >
+              <div className="flex items-center mb-4">
+                <Image src={testimonial.avatar} alt={testimonial.name} width={60} height={60} className="rounded-full mr-4" />
+                <div>
+                  <p className="font-semibold">{testimonial.name}</p>
+                  <p className="text-sm opacity-75">{testimonial.role}</p>
+                </div>
+              </div>
+              <p className="italic">"{testimonial.quote}"</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CTASection() {
+  return (
+    <section className="py-20 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl my-20">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-4xl font-bold mb-6 text-white">Ready to Connect?</h2>
+        <p className="text-xl mb-8 text-white">Join Alumni Connect today and start shaping your future!</p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-blue-500 text-white hover:bg-blue-600 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg"
+          onClick={() => signIn("google")}
+        >
+          Sign Up Now
+        </motion.button>
+      </div>
+    </section>
+  );
+}
+
