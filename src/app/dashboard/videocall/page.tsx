@@ -1,30 +1,30 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect,useRef } from 'react';
-import Peer from 'simple-peer';
-import io from 'socket.io-client';
+import React, { useState, useEffect, useRef } from 'react';
+import Peer, { Instance as PeerInstance } from 'simple-peer';
+import io, { Socket } from 'socket.io-client';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PhoneIcon } from "lucide-react";
 import { ImPhoneHangUp } from 'react-icons/im';
 
-let socket: any;
+let socket: Socket | undefined;
 
 export default function VideoCallPage() {
-  const [me, setMe] = useState('');
+  const [me, setMe] = useState<string>('');
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [receivingCall, setReceivingCall] = useState(false);
-  const [caller, setCaller] = useState('');
+  const [caller, setCaller] = useState<string>('');
   const [callerSignal, setCallerSignal] = useState<any>();
   const [callAccepted, setCallAccepted] = useState(false);
-  const [idToCall, setIdToCall] = useState('');
+  const [idToCall, setIdToCall] = useState<string>('');
   const [callEnded, setCallEnded] = useState(false);
-  const [name, setName] = useState('');
+  const [name, setName] = useState<string>('');
 
-  const myVideo = useRef<HTMLVideoElement>(null);
-  const userVideo = useRef<HTMLVideoElement>(null);
-  const connectionRef = useRef<Peer.Instance>();
+  const myVideo = useRef<HTMLVideoElement | null>(null);
+  const userVideo = useRef<HTMLVideoElement | null>(null);
+  const connectionRef = useRef<PeerInstance | undefined>();
 
   useEffect(() => {
     socketInitializer();
@@ -33,7 +33,8 @@ export default function VideoCallPage() {
       .then((stream) => {
         setStream(stream);
         if (myVideo.current) myVideo.current.srcObject = stream;
-      });
+      })
+      .catch((err) => console.error('Error accessing media devices', err));
 
     return () => {
       if (socket) {
@@ -43,10 +44,8 @@ export default function VideoCallPage() {
   }, []);
 
   const socketInitializer = async () => {
-    await fetch('/api/sockets');
-    socket = io('/', {
-      path: '/api/sockets',
-    });
+    await fetch('/api/sockets'); // Initialize sockets on the server side
+    socket = io('/', { path: '/api/sockets' });
 
     socket.on('connect', () => {
       console.log('connected');
@@ -70,19 +69,23 @@ export default function VideoCallPage() {
     });
 
     peer.on('signal', (data) => {
-      socket.emit('callUser', {
-        userToCall: id,
-        signalData: data,
-        from: me,
-        name,
-      });
+      if (socket) {
+        socket.emit('callUser', {
+          userToCall: id,
+          signalData: data,
+          from: me,
+          name,
+        });
+      }
     });
 
     peer.on('stream', (stream) => {
-      if (userVideo.current) userVideo.current.srcObject = stream;
+      if (userVideo.current) {
+        userVideo.current.srcObject = stream;
+      }
     });
 
-    socket.on('callAccepted', (signal: any) => {
+    socket?.on('callAccepted', (signal: any) => {
       setCallAccepted(true);
       peer.signal(signal);
     });
@@ -99,11 +102,15 @@ export default function VideoCallPage() {
     });
 
     peer.on('signal', (data) => {
-      socket.emit('answerCall', { signal: data, to: caller });
+      if (socket) {
+        socket.emit('answerCall', { signal: data, to: caller });
+      }
     });
 
     peer.on('stream', (stream) => {
-      if (userVideo.current) userVideo.current.srcObject = stream;
+      if (userVideo.current) {
+        userVideo.current.srcObject = stream;
+      }
     });
 
     peer.signal(callerSignal);
@@ -112,8 +119,8 @@ export default function VideoCallPage() {
 
   const leaveCall = () => {
     setCallEnded(true);
-    if (connectionRef.current) connectionRef.current.destroy();
-    window.location.reload();
+    connectionRef.current?.destroy();
+    window.location.reload(); // Reload to reset state
   };
 
   return (
