@@ -1,4 +1,4 @@
-import { Server as SocketIOServer } from 'socket.io';
+/* import { Server as SocketIOServer } from 'socket.io';
 import { NextApiResponse } from 'next';
 import { NextRequest } from 'next/server';
 import { Socket } from 'net';
@@ -39,4 +39,4 @@ export async function GET(req: NextRequest, res: NextApiResponseServerIO) {
   return new Response('Socket is running', {
     status: 200,
   });
-}
+} */
