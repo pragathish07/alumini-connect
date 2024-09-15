@@ -57,8 +57,7 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      // Simulate GoogleGenerativeAI call (make sure the API call is valid)
-      const apiKey = process.env.GOOGLE_GEMINI_API_KEY
+      
       const genAI = new GoogleGenerativeAI("AIzaSyDEoOE4ydMhkIZgrXlCng8j51tm8XI4_dU");
       
       
