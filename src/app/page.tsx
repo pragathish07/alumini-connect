@@ -119,7 +119,7 @@ function TestimonialsSection() {
                   <p className="text-sm opacity-75">{testimonial.role}</p>
                 </div>
               </div>
-              <p className="italic">"{testimonial.quote}"</p>
+              <p className="italic">{testimonial.quote}</p>
             </motion.div>
           ))}
         </div>
