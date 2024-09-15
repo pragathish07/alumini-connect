@@ -18,7 +18,7 @@ export default function VideoCallPage() {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [receivingCall, setReceivingCall] = useState(false);
   const [caller, setCaller] = useState<string>('');
-  const [callerSignal, setCallerSignal] = useState<any>();
+  const [callerSignal, setCallerSignal] = useState<Record<string, unknown> | null>(null);
   const [callAccepted, setCallAccepted] = useState(false);
   const [idToCall, setIdToCall] = useState<string>('');
   const [callEnded, setCallEnded] = useState(false);
@@ -55,7 +55,7 @@ export default function VideoCallPage() {
 
     socket.on('me', (id: string) => setMe(id));
 
-    socket.on('callUser', ({ from, name: callerName, signal }: { from: string, name: string, signal: any }) => {
+    socket.on('callUser', ({ from, name: callerName, signal }: { from: string, name: string, signal: Record<string, unknown> })  => {
       setReceivingCall(true);
       setCaller(from);
       setName(callerName);
@@ -87,7 +87,7 @@ export default function VideoCallPage() {
       }
     });
 
-    socket?.on('callAccepted', (signal: any) => {
+    socket.on('callAccepted', (signal: Record<string, unknown>) => {
       setCallAccepted(true);
       peer.signal(signal);
     });
