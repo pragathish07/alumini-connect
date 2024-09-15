@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaCommentAlt, FaTimes } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-
-// Replace with the actual package or API client for Google Generative AI
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +58,10 @@ const Chatbot = () => {
 
     try {
       // Simulate GoogleGenerativeAI call (make sure the API call is valid)
+      const apiKey = process.env.GOOGLE_GEMINI_API_KEY
       const genAI = new GoogleGenerativeAI("AIzaSyDEoOE4ydMhkIZgrXlCng8j51tm8XI4_dU");
+      
+      
       const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContentStream(userMessage);	
       
