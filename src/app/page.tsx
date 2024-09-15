@@ -4,16 +4,18 @@ import { signIn, useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import HomePage from "@/components/HomePage";
+import HomePage from "@/app/dashboard/page";
+import { div } from "framer-motion/client";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   const { data: session } = useSession();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-      <Navbar />
+      
       <main className="">
-        {session ? <HomePage /> : <LoggedOutHome />}
+        {session ? redirect("/dashboard") : <LoggedOutHome />}
       </main>
     </div>
   );

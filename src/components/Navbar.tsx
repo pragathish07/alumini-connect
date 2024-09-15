@@ -1,14 +1,16 @@
+"use client"
 import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaBell } from 'react-icons/fa';
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg fixed w-full z-20 shadow-lg">
+    <nav className="bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg fixed w-full z-20 shadow-lg h-16">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="text-2xl font-bold text-white">
@@ -24,6 +26,10 @@ export default function Navbar() {
               </>
             )}
             {session ? (
+              <>
+               <Link href="/messages" className="text-white hover:text-gray-300">
+                <FaBell/>
+              </Link>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -32,6 +38,7 @@ export default function Navbar() {
               >
                 Sign Out
               </motion.button>
+              </>
             ) : (
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -41,6 +48,7 @@ export default function Navbar() {
               >
                 Sign In
               </motion.button>
+              
             )}
           </div>
           <div className="md:hidden">
