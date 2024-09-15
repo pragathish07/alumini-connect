@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaUserFriends, FaQuestionCircle, FaComments, FaVideo, FaInfoCircle, FaBars, FaTimes , FaHome, FaUser} from 'react-icons/fa';
+import { FaUserFriends, FaQuestionCircle, FaComments, FaVideo, FaBars, FaTimes , FaHome, FaUser} from 'react-icons/fa';
 import Link from 'next/link';
-import { ImProfile } from 'react-icons/im';
-import { User } from 'lucide-react';
+
 
 const menuItems = [
   { icon: FaHome, label: 'Home', href: '/dashboard' },

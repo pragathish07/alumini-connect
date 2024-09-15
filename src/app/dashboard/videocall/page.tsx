@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import Peer from 'simple-peer';
 import io from 'socket.io-client';
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ export default function VideoCallPage() {
   const userVideo = useRef<HTMLVideoElement>(null);
   const connectionRef = useRef<Peer.Instance>();
 
-/*   useEffect(() => {
+  useEffect(() => {
     socketInitializer();
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -40,7 +40,7 @@ export default function VideoCallPage() {
         socket.disconnect();
       }
     };
-  }, []); */
+  }, []);
 
   const socketInitializer = async () => {
     await fetch('/api/sockets');

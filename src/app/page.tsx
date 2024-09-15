@@ -1,11 +1,9 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import HomePage from "@/app/dashboard/page";
-import { div } from "framer-motion/client";
+
 import { redirect } from "next/navigation";
 
 export default function Home() {
