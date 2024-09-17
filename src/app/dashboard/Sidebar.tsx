@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const menuItems = [
   { icon: FaHome, label: 'Home', href: '/dashboard' },
-  { icon: FaUser, label: 'Common Info', href: '/dashboard/profile' },
+  { icon: FaUser, label: 'Profile', href: '/dashboard/profile' },
   { icon: FaUserFriends, label: 'Connections', href: '/dashboard/connections' },
   { icon: FaQuestionCircle, label: 'Doubt Clarification', href: '/dashboard/doubts' },
   { icon: FaComments, label: 'Chats', href: '/dashboard/chats' },

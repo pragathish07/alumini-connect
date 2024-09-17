@@ -32,7 +32,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Navbar />
+          <Navbar notificationsCount={3} />
           {children}
           <Chatbot />
         </body>

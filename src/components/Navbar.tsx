@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaBell } from 'react-icons/fa';
+import { FiBell } from 'react-icons/fi';
 
-export default function Navbar() {
+export default function Navbar({notificationsCount}: {notificationsCount: number}) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,14 +21,17 @@ export default function Navbar() {
               <>
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/about">About</NavLink>
-                <NavLink href="/connect">Connect</NavLink>
+                <NavLink href="/signin">Connect</NavLink>
                 <NavLink href="/resources">Resources</NavLink>
               </>
             )}
             {session ? (
               <>
-               <Link href="/messages" className="text-white hover:text-gray-300">
-                <FaBell/>
+               <Link href="/dashboard/messages" className="text-white hover:text-gray-300 relative">
+                <FiBell/>
+                <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full transform translate-x-2 -translate-y-2">
+                    {notificationsCount}
+                </span>
               </Link>
               <motion.button
                 whileHover={{ scale: 1.05 }}

@@ -55,8 +55,7 @@ export default function ProfilePage() {
           <div className="flex gap-4">
             <Input
               placeholder="First Name"
- 
-              className="flex-grow bg-blue-800 bg-opacity-50 text-white placeholder-blue-300 border-blue-700"
+              className="flex-grow bg-blue-800 bg-opacity-50 text-white placeholder-blue-300 border-blue-700 placeholder-white"
             />
             <Input
               placeholder="Last Name"

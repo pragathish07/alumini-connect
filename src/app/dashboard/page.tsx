@@ -9,7 +9,7 @@ export default function HomePage() {
           <div className="bg-blue-900 bg-opacity-30 backdrop-filter backdrop-blur-lg p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4 text-white">Explore Connections</h2>
             <p className="text-white mb-4">Discover and connect with alumni and fellow students in your field.</p>
-            <Link href="/connections" className="text-blue-400 hover:text-blue-300">Find connections &rarr;</Link>
+            <Link href="/dashboard/connections" className="text-blue-400 hover:text-blue-300">Find connections &rarr;</Link>
           </div>
           <div className="bg-blue-900 bg-opacity-30 backdrop-filter backdrop-blur-lg p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4 text-white">Latest Opportunities</h2>
@@ -19,7 +19,7 @@ export default function HomePage() {
           <div className="bg-blue-900 bg-opacity-30 backdrop-filter backdrop-blur-lg p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4 text-white">Trending Discussions</h2>
             <p className="text-white mb-4">Join conversations on hot topics in your industry.</p>
-            <Link href="/discussions" className="text-blue-400 hover:text-blue-300">See discussions &rarr;</Link>
+            <Link href="/dashboard/doubts" className="text-blue-400 hover:text-blue-300">See discussions &rarr;</Link>
           </div>
         </div>
       </div>

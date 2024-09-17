@@ -95,8 +95,8 @@ function FeaturesSection() {
 
 function TestimonialsSection() {
   const testimonials = [
-    { name: "John Doe", role: "Software Engineer", quote: "Alumni Connect helped me land my dream job!", avatar: "/avatar1.png" },
-    { name: "Jane Smith", role: "Marketing Manager", quote: "The advice I received was invaluable for my career growth.", avatar: "/avatar2.png" },
+    { name: "John Doe", role: "Software Engineer", quote: "Alumni Connect helped me land my dream job!", avatar: "https://randomuser.me/api/portraits/men/1.jpg" },
+    { name: "Jane Smith", role: "Marketing Manager", quote: "The advice I received was invaluable for my career growth.", avatar: "https://randomuser.me/api/portraits/men/3.jpg" },
   ];
 
   return (
@@ -113,7 +113,7 @@ function TestimonialsSection() {
               className="bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-md text-white"
             >
               <div className="flex items-center mb-4">
-                <Image src={testimonial.avatar} alt={testimonial.name} width={60} height={60} className="rounded-full mr-4" />
+                <img src={testimonial.avatar} alt={testimonial.name} width={60} height={60} className="rounded-full mr-4" />
                 <div>
                   <p className="font-semibold">{testimonial.name}</p>
                   <p className="text-sm opacity-75">{testimonial.role}</p>
