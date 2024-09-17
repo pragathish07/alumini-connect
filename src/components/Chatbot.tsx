@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { FaCommentAlt, FaTimes, FaMicrophone, FaPaperclip, FaGlobe } from "react-icons/fa";
+import { FaCommentAlt, FaTimes, FaMicrophone, FaPaperclip } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { GoogleGenerativeAI } from "@google/generative-ai";
