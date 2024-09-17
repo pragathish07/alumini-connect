@@ -1,15 +1,32 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { FaCommentAlt, FaTimes } from "react-icons/fa";
+import { FaCommentAlt, FaTimes, FaMicrophone, FaPaperclip, FaGlobe } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+const languages = [
+  { code: "en", name: "English" },
+  { code: "hi", name: "हिन्दी" },
+  { code: "raj", name: "राजस्थानी" },
+  { code: "ta", name: "தமிழ்" },
+  { code: "ml", name: "മലയാളം" },
+  { code: "te", name: "తెలుగు" },
+  { code: "mr", name: "मराठी" },
+  { code: "gu", name: "ગુજરાતી" },
+  { code: "ur", name: "اردو" },
+  { code: "kn", name: "ಕನ್ನಡ" },
+  { code: "bn", name: "বাংলা" },
+  { code: "or", name: "ଓଡ଼ିଆ" },
+  // Add more languages as needed
+];
+
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMessage, setUserMessage] = useState("");
-  
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+
   interface ChatMessage {
     sender: string;
     message: string;
@@ -57,27 +74,20 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      
       const genAI = new GoogleGenerativeAI("AIzaSyDEoOE4ydMhkIZgrXlCng8j51tm8XI4_dU");
-      
-      
       const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContentStream(userMessage);	
-      
+      const result = await model.generateContentStream(userMessage);
       const response = await result.response;
       const text = response.text();
-      
-      // Assume the response object provides text response
+
       const responseText = text || "I'm not sure how to respond.";
 
-      // Update the chat log with the bot's response
       const updatedChatLog = [
         ...newChatLog,
         { sender: "bot", message: responseText },
       ];
       setChatLog(updatedChatLog);
 
-      // Save the updated chat log to localStorage
       saveChatLogToLocalStorage(updatedChatLog);
     } catch (error) {
       console.error("Error fetching response:", error);
@@ -86,17 +96,34 @@ const Chatbot = () => {
         { sender: "bot", message: "Sorry, something went wrong." },
       ];
       setChatLog(errorChatLog);
-
-      // Save the error state to localStorage
       saveChatLogToLocalStorage(errorChatLog);
     } finally {
       setLoading(false);
     }
   };
 
+  // Placeholder for speech-to-text conversion
+  const handleSpeechInput = () => {
+    console.log("Start speech-to-text conversion...");
+    // Implement speech-to-text functionality here
+  };
+
+  // Placeholder for file input handling
+  const handleFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      console.log("Selected file:", file);
+      // Handle file upload logic
+    }
+  };
+
+  // Change language for multilingual support
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLanguage(e.target.value);
+  };
+
   return (
     <>
-      {/* Chat Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           className="bg-blue-600 w-16 h-16 rounded-full shadow-lg text-white flex items-center justify-center hover:bg-blue-700 focus:outline-none"
@@ -106,14 +133,24 @@ const Chatbot = () => {
         </Button>
       </div>
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-28 right-6 z-50 w-96 bg-gray-900 text-white shadow-lg rounded-lg overflow-hidden">
-          <div className="bg-blue-800 p-4">
+          <div className="bg-blue-800 p-4 flex justify-between items-center">
             <h2 className="text-xl font-semibold">Chatbot</h2>
+            <select
+              className="bg-blue-950 text-white rounded-md px-2 py-2 text-sm w-52 p-4"
+              value={selectedLanguage}
+              onChange={handleLanguageChange}
+            >
+              {languages.map((lang) => (
+                <option key={lang.code}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
           </div>
+
           <div className="p-4 flex-grow h-96 overflow-y-auto">
-            {/* Display chat log */}
             {chatLog.map((chat, index) => (
               <div
                 key={index}
@@ -136,18 +173,35 @@ const Chatbot = () => {
               </div>
             )}
           </div>
-          <div className="p-4 bg-gray-800">
+
+          <div className="p-4 bg-gray-800 flex items-center space-x-2">
             <Input
               type="text"
               placeholder="Type a message..."
               value={userMessage}
               onChange={(e) => setUserMessage(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-              className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none"
+              className="flex-grow p-2 rounded bg-gray-700 text-white focus:outline-none"
             />
+
+            <FaMicrophone
+              onClick={handleSpeechInput}
+              className="text-white cursor-pointer hover:text-blue-500"
+              size={24}
+            />
+
+            <label className="cursor-pointer">
+              <FaPaperclip size={24} className="text-white hover:text-blue-500" />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleFileInput}
+              />
+            </label>
+
             <Button
               onClick={handleSendMessage}
-              className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded"
+              className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded"
               disabled={loading}
             >
               {loading ? "Sending..." : "Send"}
