@@ -26,9 +26,9 @@ function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-5xl font-bold mb-6">About Alumni Connect</h1>
+        <h1 className="text-5xl font-bold mb-6">About Alumni Hub</h1>
         <p className="text-xl max-w-3xl mx-auto mb-8">
-          Alumni Connect is a platform designed to bridge the gap between alumni
+          Alumni Hub is a platform designed to bridge the gap between alumni
           and current students. We believe in fostering relationships that
           inspire, guide, and shape the future of our academic community.
         </p>
@@ -152,7 +152,7 @@ function CTASection() {
         <p className="text-xl mb-8 max-w-2xl mx-auto">
           Be a part of a community that supports, guides, and inspires each
           other. Whether you&apos;re an alum or a student, there&apos;s always something
-          to give and receive. Join Alumni Connect today!
+          to give and receive. Join Alumni Hub today!
         </p>
         <motion.button
           whileHover={{ scale: 1.05 }}

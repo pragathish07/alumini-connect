@@ -17,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Alumni Connect",
-  description: "Student and Alumni Connection Platform",
+  title: "Alumni Hub",
+  description: "Student and Alumni Hubion Platform",
 };
 
 export default function RootLayout({

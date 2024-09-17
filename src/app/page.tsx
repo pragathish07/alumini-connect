@@ -39,7 +39,7 @@ function HeroSection() {
         transition={{ duration: 0.8 }}
         className="md:w-1/2 text-white"
       >
-        <h1 className="text-5xl font-bold mb-6">Welcome to Alumni Connect</h1>
+        <h1 className="text-5xl font-bold mb-6">Welcome to Alumni Hub</h1>
         <p className="text-xl mb-8">Connect with alumni, get advice, and shape your future!</p>
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -72,7 +72,7 @@ function FeaturesSection() {
   return (
     <section className="py-20 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl my-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-12 text-center text-white">Why Choose Alumni Connect?</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center text-white">Why Choose Alumni Hub?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <motion.div
@@ -95,7 +95,7 @@ function FeaturesSection() {
 
 function TestimonialsSection() {
   const testimonials = [
-    { name: "John Doe", role: "Software Engineer", quote: "Alumni Connect helped me land my dream job!", avatar: "https://randomuser.me/api/portraits/men/1.jpg" },
+    { name: "John Doe", role: "Software Engineer", quote: "Alumni Hub helped me land my dream job!", avatar: "https://randomuser.me/api/portraits/men/1.jpg" },
     { name: "Jane Smith", role: "Marketing Manager", quote: "The advice I received was invaluable for my career growth.", avatar: "https://randomuser.me/api/portraits/men/3.jpg" },
   ];
 
@@ -133,7 +133,7 @@ function CTASection() {
     <section className="py-20 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-lg shadow-xl my-20">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold mb-6 text-white">Ready to Connect?</h2>
-        <p className="text-xl mb-8 text-white">Join Alumni Connect today and start shaping your future!</p>
+        <p className="text-xl mb-8 text-white">Join Alumni Hub today and start shaping your future!</p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
