@@ -4,13 +4,18 @@ import React, { useState } from "react";
 import { FaEdit, FaUpload } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 
-
 export default function ProfilePage() {
   const { data: session } = useSession();
 
+  // Set initial state with default values from the session or empty strings
   const [profileImage, setProfileImage] = useState(session?.user?.image || "https://avatar.iran.liara.run/public");
-  
-  
+  const [firstName, setFirstName] = useState(session?.user?.name?.split(" ")[0] || "");
+  const [lastName, setLastName] = useState(session?.user?.name?.split(" ")[1] || "");
+  const [email] = useState(session?.user?.email || "");
+  const [location, setLocation] = useState(""); // Editable
+  const [skills, setSkills] = useState(""); // Editable
+  const [interests, setInterests] = useState(""); // Editable
+  const [bio, setBio] = useState(""); // Editable
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -26,6 +31,15 @@ export default function ProfilePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic, like updating profile data in a database
+    console.log({
+      firstName,
+      lastName,
+      email,
+      location,
+      skills,
+      interests,
+      bio,
+    });
   };
 
   return (
@@ -60,42 +74,54 @@ export default function ProfilePage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex gap-4">
             <input
+              type="text"
               placeholder="First Name"
-              defaultValue={session?.user?.name?.split(" ")[0]} // Auto-fill with OAuth first name
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)} // Allow editing
               className="flex-grow bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out"
             />
             <input
+              type="text"
               placeholder="Last Name"
-              defaultValue={session?.user?.name?.split(" ")[1]} // Auto-fill with OAuth last name
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)} // Allow editing
               className="flex-grow bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out"
             />
           </div>
 
           <input
+            type="text"
             placeholder="Email"
-            defaultValue={session?.user?.email || ""} // Auto-fill with OAuth email
+            value={email}
+            readOnly // Email remains read-only
             className="w-full bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out"
-            readOnly // Make email read-only to prevent changes
           />
           <input
+            type="text"
             placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)} // Allow editing
             className="w-full bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out"
-            readOnly // Make email read-only to prevent changes
           />
           <input
-            placeholder="Skils (e.g.,Javascript,Python,Java)"
+            type="text"
+            placeholder="Skills (e.g., Javascript, Python, Java)"
+            value={skills}
+            onChange={(e) => setSkills(e.target.value)} // Allow editing
             className="w-full bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out"
-            readOnly // Make email read-only to prevent changes
           />
           <input
+            type="text"
             placeholder="Area Of Interests"
+            value={interests}
+            onChange={(e) => setInterests(e.target.value)} // Allow editing
             className="w-full bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out"
-            readOnly // Make email read-only to prevent changes
           />
-
 
           <textarea
             placeholder="Bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)} // Allow editing
             className="w-full bg-blue-800 bg-opacity-50 text-white placeholder-white placeholder-opacity-90 border border-blue-700 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 ease-in-out resize-none h-24"
           />
 
