@@ -151,7 +151,7 @@ function CTASection() {
         <h2 className="text-4xl font-bold mb-6">Join Us in Shaping the Future</h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto">
           Be a part of a community that supports, guides, and inspires each
-          other. Whether you're an alum or a student, there's always something
+          other. Whether you&apos;re an alum or a student, there&apos;s always something
           to give and receive. Join Alumni Connect today!
         </p>
         <motion.button
