@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { FaPaperPlane, FaBars } from 'react-icons/fa';
 
 const staticChats = [
-  { id: 1, name: 'John Doe', lastMessage: 'Hey, how are you?', unread: 2 },
-  { id: 2, name: 'Jane Smith', lastMessage: 'Can we discuss the project?', unread: 0 },
-  { id: 3, name: 'Mike Johnson', lastMessage: 'Thanks for your help!', unread: 1 },
+  { id: 1, name: 'Sunil Kumar', lastMessage: 'Hey, how are you?', unread: 2 },
+  { id: 2, name: 'Samarjit Singh', lastMessage: 'Can we discuss the project?', unread: 0 },
+  { id: 3, name: 'Kamalesh', lastMessage: 'Thanks for your help!', unread: 1 },
 ];
 
 const staticMessages = [
