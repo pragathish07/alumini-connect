@@ -93,7 +93,7 @@ const Chatbot = () => {
       console.error("Error fetching response:", error);
       const errorChatLog = [
         ...newChatLog,
-        { sender: "bot", message: "Sorry, something went wrong." },
+        { sender: "bot", message: "Sorry, something went wrong :(." },
       ];
       setChatLog(errorChatLog);
       saveChatLogToLocalStorage(errorChatLog);
