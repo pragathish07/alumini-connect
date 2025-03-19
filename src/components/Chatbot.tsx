@@ -74,7 +74,7 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      const genAI = new GoogleGenerativeAI("AIzaSyDEoOE4ydMhkIZgrXlCng8j51tm8XI4_dU");
+      const genAI = new GoogleGenerativeAI("your-gemini-api-key");
       const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContentStream(userMessage);
       const response = await result.response;
