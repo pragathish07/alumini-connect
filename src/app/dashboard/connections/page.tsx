@@ -16,16 +16,23 @@ type Profile = {
 };
 
 const staticProfiles: Profile[] = [
-  { id: 1, name: "John Doe", college: "MIT", company: "Google", location: "San Francisco", role: "Software Engineer", imageUrl: "https://randomuser.me/api/portraits/men/1.jpg" },
-  { id: 2, name: "Jane Smith", college: "Stanford", company: "Apple", location: "Cupertino", role: "Product Manager", imageUrl: "https://randomuser.me/api/portraits/women/2.jpg" },
-  { id: 3, name: "Mike Johnson", college: "Harvard", company: "Amazon", location: "Seattle", role: "Data Scientist", imageUrl: "https://randomuser.me/api/portraits/men/3.jpg" },
-  { id: 4, name: "Emily Brown", college: "Yale", company: "Microsoft", location: "Redmond", role: "UX Designer", imageUrl: "https://randomuser.me/api/portraits/women/4.jpg" },
-  { id: 5, name: "David Lee", college: "Berkeley", company: "Facebook", location: "Menlo Park", role: "Software Engineer", imageUrl: "https://randomuser.me/api/portraits/men/5.jpg" },
+  { id: 1, name: "Amit Kumar", college: "Indian Institute of Technology, Bombay", company: "Reliance Industries", location: "Mumbai, Maharashtra", role: "Software Engineer", imageUrl: "https://randomuser.me/api/portraits/men/10.jpg" },
+  { id: 2, name: "Priya Sharma", college: "Indian Institute of Management, Bangalore", company: "Flipkart", location: "Bangalore, Karnataka", role: "Business Analyst", imageUrl: "https://randomuser.me/api/portraits/women/11.jpg" },
+  { id: 3, name: "Ravi Patel", college: "Indian Institute of Technology, Delhi", company: "HCL Technologies", location: "New Delhi, Delhi", role: "Systems Engineer", imageUrl: "https://randomuser.me/api/portraits/men/12.jpg" },
+  { id: 4, name: "Sanya Gupta", college: "Delhi University", company: "Zomato", location: "Gurgaon, Haryana", role: "Marketing Manager", imageUrl: "https://randomuser.me/api/portraits/women/13.jpg" },
+  { id: 5, name: "Rajesh Singh", college: "Banaras Hindu University", company: "Tata Motors", location: "Varanasi, Uttar Pradesh", role: "Mechanical Engineer", imageUrl: "https://randomuser.me/api/portraits/men/14.jpg" },
+  { id: 6, name: "Anjali Mehta", college: "Jawaharlal Nehru University", company: "Infosys", location: "Bangalore, Karnataka", role: "Human Resource Manager", imageUrl: "https://randomuser.me/api/portraits/women/15.jpg" },
+  { id: 7, name: "Karthik Reddy", college: "Osmania University", company: "Microsoft", location: "Hyderabad, Telangana", role: "Cloud Engineer", imageUrl: "https://randomuser.me/api/portraits/men/16.jpg" },
+  { id: 8, name: "Sneha Kapoor", college: "University of Rajasthan", company: "Adani Group", location: "Jaipur, Rajasthan", role: "Project Manager", imageUrl: "https://randomuser.me/api/portraits/women/17.jpg" },
+  { id: 9, name: "Vikas Menon", college: "Anna University", company: "Zoho Corporation", location: "Chennai, Tamil Nadu", role: "Software Developer", imageUrl: "https://randomuser.me/api/portraits/men/18.jpg" },
+  { id: 10, name: "Neha Verma", college: "Jadavpur University", company: "Wipro", location: "Kolkata, West Bengal", role: "Data Scientist", imageUrl: "https://randomuser.me/api/portraits/women/19.jpg" },
 ];
 
-const colleges = ["All", "MIT", "Stanford", "Harvard", "Yale", "Berkeley"];
-const companies = ["All", "Google", "Apple", "Amazon", "Microsoft", "Facebook"];
-const locations = ["All", "San Francisco", "Cupertino", "Seattle", "Redmond", "Menlo Park"];
+
+const colleges = ["All", "IIT Bombay", "IIT Delhi", "IIM Bangalore", "Jawaharlal Nehru University", "BITS Pilani"];
+const companies = ["All", "TCS", "Infosys", "Wipro", "Reliance Industries", "Flipkart"];
+const locations = ["All", "Mumbai", "Bangalore", "New Delhi", "Hyderabad", "Gurgaon"];
+
 
 export default function ConnectionsPage() {
   const [profiles, setProfiles] = useState(staticProfiles);
